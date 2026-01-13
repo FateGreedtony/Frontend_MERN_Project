@@ -1,8 +1,6 @@
-const RAW_BACKEND_BASEURL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL || "http://localhost:4000";
-const BACKEND_BASEURL = RAW_BACKEND_BASEURL.replace(/\/+$/, "");
+const BACKEND_BASEURL = (import.meta.env.VITE_REACT_APP_BACKEND_BASEURL || "http://localhost:4000").replace(/\/+$/, "");
+const api = (path) => `${BACKEND_BASEURL}${path.startsWith("/") ? path : `/${path}`}`;
 
-const joinUrl = (baseUrl, path) => `${baseUrl.replace(/\/+$/, "")}/${String(path).replace(/^\/+/, "")}`;
-
-export const URL_SIGNIN = joinUrl(BACKEND_BASEURL, "api/auth/signin");
-export const URL_PRODUCTS = joinUrl(BACKEND_BASEURL, "api/products");
-export const URL_TRANSACTIONS = joinUrl(BACKEND_BASEURL, "api/transactions");
+export const URL_SIGNIN = api("/api/auth/signin");
+export const URL_PRODUCTS = api("/api/products");
+export const URL_TRANSACTIONS = api("/api/transactions");
